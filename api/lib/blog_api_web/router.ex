@@ -7,7 +7,6 @@ defmodule BlogApiWeb.Router do
 
   scope "/api", BlogApiWeb do
     pipe_through :api
-    get "/", PostsController, :action
     resources "/posts", PostController
   end
 end
