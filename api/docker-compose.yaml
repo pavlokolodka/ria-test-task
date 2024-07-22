@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  blog_api:
+    build:
+      context: .   
+    env_file:
+      - .env.dev
+    ports:
+      - "4000:4000"
+    depends_on:
+      - postgres
+  
+  postgres:
+    image: postgres:15    
+    env_file:
+      - .env.db
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  postgres_test:
+    image: postgres:15   
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 6NXpX5gPTpfX
+      POSTGRES_DB: blog_test
+    volumes:
+      - pgdata_test:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"  
+
+volumes:
+  pgdata:
+  pgdata_test:
